@@ -1,4 +1,8 @@
+import { CustomError, IErrorResponse } from '@global/helpers/error-handler';
+import { config } from '@root/config';
+import applicationRoutes from '@root/routes';
 import { createAdapter } from '@socket.io/redis-adapter';
+import { SocketIOPostHandler } from '@socket/post';
 import Logger from 'bunyan';
 import compression from 'compression';
 import cookieSession from 'cookie-session';
@@ -11,9 +15,6 @@ import http from 'http';
 import HTTP_STATUS from 'http-status-codes';
 import { createClient } from 'redis';
 import { Server } from 'socket.io';
-import { config } from '@root/config';
-import applicationRoutes from '@root/routes';
-import { CustomError, IErrorResponse } from '@global/helpers/error-handler';
 
 const SERVER_PORT = 5000;
 const log: Logger = config.createLogger('server');
@@ -111,8 +112,9 @@ export class ChattyServer {
     });
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   private socketIOConnections(io: Server): void {
-    log.info('socketIOConnections');
+    const postSocketHandler: SocketIOPostHandler = new SocketIOPostHandler(io);
+
+    postSocketHandler.listen();
   }
 }
