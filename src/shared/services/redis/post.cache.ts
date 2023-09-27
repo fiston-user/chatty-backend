@@ -1,6 +1,7 @@
 import { InternalServerError } from '@global/helpers/error-handler';
 import { Helpers } from '@global/helpers/helpers';
-import { IPostDocument, IReactions, ISavePostToCache } from '@post/interfaces/post.interface';
+import { IPostDocument, ISavePostToCache } from '@post/interfaces/post.interface';
+import { IReactions } from '@reaction/interfaces/reaction.interface';
 import { RedisCommandRawReply } from '@redis/client/dist/lib/commands';
 import { config } from '@root/config';
 import { BaseCache } from '@service/redis/base.cache';

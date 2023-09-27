@@ -24,9 +24,10 @@ export class Helpers {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   static parseJson(json: string): any {
     try {
-      return JSON.parse(json);
+      JSON.parse(json);
     } catch (e) {
       return json;
     }
+    return JSON.parse(json);
   }
 }
