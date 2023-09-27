@@ -10,6 +10,7 @@ import { Request, Response } from 'express';
 import HTTP_STATUS from 'http-status-codes';
 import JWT from 'jsonwebtoken';
 
+
 export class SignIn {
   @joiValidation(loginSchema)
   public async read(req: Request, res: Response): Promise<void> {
@@ -35,7 +36,6 @@ export class SignIn {
       },
       config.JWT_TOKEN as string
     );
-    req.session = { jwt: userJwt };
     const userDocument: IUserDocument = {
       ...user,
       authId: existingUser!._id,
@@ -45,6 +45,7 @@ export class SignIn {
       uId: existingUser!.uId,
       createdAt: existingUser!.createdAt
     } as IUserDocument;
+    req.session = { jwt: userJwt };
     res.status(HTTP_STATUS.OK).json({ message: 'User login successfully', user: userDocument, token: userJwt });
   }
 }
