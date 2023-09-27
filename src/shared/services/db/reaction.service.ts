@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Helpers } from '@global/helpers/helpers';
 import { PostModel } from '@post/models/post.schema';
 import { IQueryReaction, IReactionDocument, IReactionJob } from '@reaction/interfaces/reaction.interface';
