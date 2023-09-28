@@ -3,6 +3,7 @@ import { config } from '@root/config';
 import applicationRoutes from '@root/routes';
 import { createAdapter } from '@socket.io/redis-adapter';
 import { SocketIOFollowerHandler } from '@socket/follower';
+import { SocketIOImageHandler } from '@socket/image';
 import { SocketIONotificationHandler } from '@socket/notification';
 import { SocketIOPostHandler } from '@socket/post';
 import { SocketIOUserHandler } from '@socket/user';
@@ -120,10 +121,12 @@ export class ChattyServer {
     const followerSocketHandler: SocketIOFollowerHandler = new SocketIOFollowerHandler(io);
     const userSocketHandler: SocketIOUserHandler = new SocketIOUserHandler(io);
     const notificationSocketHandler: SocketIONotificationHandler = new SocketIONotificationHandler();
+    const imageSocketHandler: SocketIOImageHandler = new SocketIOImageHandler();
 
     followerSocketHandler.listen();
     postSocketHandler.listen();
     userSocketHandler.listen();
     notificationSocketHandler.listen(io);
+    imageSocketHandler.listen(io);
   }
 }

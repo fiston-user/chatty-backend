@@ -2,10 +2,11 @@ import { InternalServerError } from '@global/helpers/error-handler';
 import { Helpers } from '@global/helpers/helpers';
 import { config } from '@root/config';
 import { BaseCache } from '@service/redis/base.cache';
-import { IUserDocument } from '@user/interfaces/user.interface';
+import { INotificationSettings, ISocialLinks, IUserDocument } from '@user/interfaces/user.interface';
 import Logger from 'bunyan';
 
 const log: Logger = config.createLogger('userCache');
+type UserItem = string | ISocialLinks | INotificationSettings;
 
 export class UserCache extends BaseCache {
   constructor() {
@@ -87,7 +88,23 @@ export class UserCache extends BaseCache {
       response.social = Helpers.parseJson(`${response.social}`);
       response.followersCount = Helpers.parseJson(`${response.followersCount}`);
       response.followingCount = Helpers.parseJson(`${response.followingCount}`);
+      response.bgImageId = Helpers.parseJson(`${response.bgImageId}`);
+      response.bgImageVersion = Helpers.parseJson(`${response.bgImageVersion}`);
+      response.profilePicture = Helpers.parseJson(`${response.profilePicture}`);
 
+      return response;
+    } catch (error) {
+      throw new InternalServerError('Server error. Try again.');
+    }
+  }
+
+  public async updateSingleUserItemInCache(userId: string, prop: string, value: UserItem): Promise<IUserDocument | null> {
+    try {
+      if (!this.client.isOpen) {
+        await this.client.connect();
+      }
+      await this.client.HSET(`users:${userId}`, `${prop}`, JSON.stringify(value));
+      const response: IUserDocument = (await this.getUserFromCache(userId)) as IUserDocument;
       return response;
     } catch (error) {
       throw new InternalServerError('Server error. Try again.');
