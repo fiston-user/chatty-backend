@@ -3,6 +3,7 @@ import { config } from '@root/config';
 import applicationRoutes from '@root/routes';
 import { createAdapter } from '@socket.io/redis-adapter';
 import { SocketIOFollowerHandler } from '@socket/follower';
+import { SocketIONotificationHandler } from '@socket/notification';
 import { SocketIOPostHandler } from '@socket/post';
 import { SocketIOUserHandler } from '@socket/user';
 import Logger from 'bunyan';
@@ -118,9 +119,11 @@ export class ChattyServer {
     const postSocketHandler: SocketIOPostHandler = new SocketIOPostHandler(io);
     const followerSocketHandler: SocketIOFollowerHandler = new SocketIOFollowerHandler(io);
     const userSocketHandler: SocketIOUserHandler = new SocketIOUserHandler(io);
+    const notificationSocketHandler: SocketIONotificationHandler = new SocketIONotificationHandler();
 
     followerSocketHandler.listen();
     postSocketHandler.listen();
     userSocketHandler.listen();
+    notificationSocketHandler.listen(io);
   }
 }
