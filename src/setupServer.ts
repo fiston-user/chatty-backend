@@ -2,7 +2,9 @@ import { CustomError, IErrorResponse } from '@global/helpers/error-handler';
 import { config } from '@root/config';
 import applicationRoutes from '@root/routes';
 import { createAdapter } from '@socket.io/redis-adapter';
+import { SocketIOFollowerHandler } from '@socket/follower';
 import { SocketIOPostHandler } from '@socket/post';
+import { SocketIOUserHandler } from '@socket/user';
 import Logger from 'bunyan';
 import compression from 'compression';
 import cookieSession from 'cookie-session';
@@ -114,7 +116,11 @@ export class ChattyServer {
 
   private socketIOConnections(io: Server): void {
     const postSocketHandler: SocketIOPostHandler = new SocketIOPostHandler(io);
+    const followerSocketHandler: SocketIOFollowerHandler = new SocketIOFollowerHandler(io);
+    const userSocketHandler: SocketIOUserHandler = new SocketIOUserHandler(io);
 
+    followerSocketHandler.listen();
     postSocketHandler.listen();
+    userSocketHandler.listen();
   }
 }
