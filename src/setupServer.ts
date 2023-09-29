@@ -2,6 +2,7 @@ import { CustomError, IErrorResponse } from '@global/helpers/error-handler';
 import { config } from '@root/config';
 import applicationRoutes from '@root/routes';
 import { createAdapter } from '@socket.io/redis-adapter';
+import { SocketIOChatHandler } from '@socket/chat';
 import { SocketIOFollowerHandler } from '@socket/follower';
 import { SocketIOImageHandler } from '@socket/image';
 import { SocketIONotificationHandler } from '@socket/notification';
@@ -120,12 +121,14 @@ export class ChattyServer {
     const postSocketHandler: SocketIOPostHandler = new SocketIOPostHandler(io);
     const followerSocketHandler: SocketIOFollowerHandler = new SocketIOFollowerHandler(io);
     const userSocketHandler: SocketIOUserHandler = new SocketIOUserHandler(io);
+    const chatSocketHandler: SocketIOChatHandler = new SocketIOChatHandler(io);
     const notificationSocketHandler: SocketIONotificationHandler = new SocketIONotificationHandler();
     const imageSocketHandler: SocketIOImageHandler = new SocketIOImageHandler();
 
     followerSocketHandler.listen();
     postSocketHandler.listen();
     userSocketHandler.listen();
+    chatSocketHandler.listen();
     notificationSocketHandler.listen(io);
     imageSocketHandler.listen(io);
   }
