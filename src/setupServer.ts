@@ -20,6 +20,7 @@ import http from 'http';
 import HTTP_STATUS from 'http-status-codes';
 import { createClient } from 'redis';
 import { Server } from 'socket.io';
+import apiStats from 'swagger-stats';
 
 const SERVER_PORT = 5000;
 const log: Logger = config.createLogger('server');
@@ -35,6 +36,7 @@ export class ChattyServer {
     this.securityMiddleware(this.app);
     this.standardMiddleware(this.app);
     this.routesMiddleware(this.app);
+    this.apiStatsMonitoring(this.app);
     this.globalErrorHandler(this.app);
     this.startServer(this.app);
   }
@@ -70,6 +72,16 @@ export class ChattyServer {
     applicationRoutes(app);
   }
 
+  private apiStatsMonitoring(app: Application): void {
+    app.use(
+      apiStats.getMiddleware({
+        name: 'Chatty API',
+        version: '1.0.0',
+        uriPath: '/api-monitoring'
+      })
+    );
+  }
+
   private globalErrorHandler(app: Application): void {
     app.all('*', (req: Request, res: Response, next: NextFunction) => {
       res.status(HTTP_STATUS.NOT_FOUND).json({ message: `${req.originalUrl} not found` });
@@ -86,6 +98,9 @@ export class ChattyServer {
   }
 
   private async startServer(app: Application): Promise<void> {
+    if (!config.JWT_TOKEN) {
+      throw new Error('JWT_TOKEN is not defined');
+    }
     try {
       const httpServer: http.Server = new http.Server(app);
       const socketIO: Server = await this.createSocketIO(httpServer);
@@ -111,6 +126,7 @@ export class ChattyServer {
   }
 
   private startHttpServer(httpServer: http.Server): void {
+    log.info(`Worker process id of ${process.pid} has started`);
     log.info(`Server has started with process id: ${process.pid}`);
     httpServer.listen(SERVER_PORT, () => {
       log.info(`Server running on port ${SERVER_PORT}`);
