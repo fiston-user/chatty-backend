@@ -10,7 +10,7 @@ import { INotificationJobData } from '@notification/interfaces/notification.inte
 import { IPostJobData } from '@post/interfaces/post.interface';
 import { IReactionJob } from '@reaction/interfaces/reaction.interface';
 import { config } from '@root/config';
-import { IEmailJob } from '@user/interfaces/user.interface';
+import { IEmailJob, IUserJob } from '@user/interfaces/user.interface';
 import Queue, { Job } from 'bull';
 import Logger from 'bunyan';
 
@@ -26,6 +26,7 @@ type IBaseJobData =
   | IFileImageJobData
   | IChatJobData
   | IMessageData
+  | IUserJob;
 
 let bullAdapters: BullAdapter[] = [];
 export let serverAdapter: ExpressAdapter;
