@@ -8,10 +8,10 @@ Accept: application/json
 withCredentials: true
 
 {
-  "username": "jane",
+  "username": "john",
   "password": "qwerty",
-  "email": "jane.doe@domain.fr",
-  "avatarColor": "red",
+  "email": "john.doe@domain.fr",
+  "avatarColor": "blue",
   "avatarImage": "https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png"
 }
 
@@ -22,8 +22,8 @@ Accept: application/json
 withCredentials: true
 
 {
-  "username": "jane",
-  "password": "qwerty1"
+  "username": "john",
+  "password": "qwerty"
 }
 
 ###
