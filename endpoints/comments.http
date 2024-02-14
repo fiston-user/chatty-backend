@@ -1,0 +1,41 @@
+@baseUrl = http://localhost:5000
+@urlPath = api/v1
+
+
+###
+POST {{baseUrl}}/{{urlPath}}/post/comment
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+{
+  "userTo": "65ca3bfe6274c8fa0da29a83",
+  "postId": "65cb9e5a47721ce6c0d6e840",
+  "profilePicture": "https://media.giphy.com/media/3o7TKz5v3k3J3Jp2Wc/giphy.gif",
+  "comment": "This is a new comment"
+}
+
+###
+GET {{baseUrl}}/{{urlPath}}/post/commentsnames/65cb9e5a47721ce6c0d6e840
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+{}
+
+###
+GET {{baseUrl}}/{{urlPath}}/post/single/comment/65cb9e5a47721ce6c0d6e840/65cc0878fee4bc41c5fd73ce
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+{}
+
+
+###
+GET {{baseUrl}}/{{urlPath}}/post/comments/65cb9e5a47721ce6c0d6e840
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+{}
