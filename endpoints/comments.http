@@ -9,10 +9,10 @@ Accept: application/json
 withCredentials: true
 
 {
-  "userTo": "65ca3bfe6274c8fa0da29a83",
-  "postId": "65cb9e5a47721ce6c0d6e840",
+  "userTo": "65cca608d9ab04bf7021008f",
+  "postId": "65cd48e41d4cc86e3ac854f4",
   "profilePicture": "https://media.giphy.com/media/3o7TKz5v3k3J3Jp2Wc/giphy.gif",
-  "comment": "This is a new comment"
+  "comment": "Wow, this is a great post"
 }
 
 ###
