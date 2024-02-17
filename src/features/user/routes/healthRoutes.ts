@@ -45,14 +45,14 @@ class HealthRoutes {
       const start: number = performance.now();
       const result: number = this.fibo(parseInt(req.params.num, 10));
       const end: number = performance.now();
-      const response = await axios({
-        method: 'get',
-        url: config.EC2_URL
-      });
+      // const response = await axios({
+      //   method: 'get',
+      //   url: config.EC2_URL
+      // });
       res
         .status(HTTP_STATUS.OK)
         .send(
-          `Server is running on instance: ${response.data} with process id: ${process.pid} on ${moment().format('LL')}. The result of the fibonacci sequence for ${num} is ${result}. It took ${end - start} milliseconds.`
+          `Fibo of ${num} is ${result} and it took ${end - start} milliseconds with process id: ${process.pid} on ${moment().format('LL')}`
         );
     });
     return this.router;
