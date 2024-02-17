@@ -1,0 +1,101 @@
+@baseUrl = http://localhost:5000
+@urlPath = api/v1
+
+###
+GET {{baseUrl}}/{{urlPath}}/user/all/1
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+{}
+
+###
+GET {{baseUrl}}/{{urlPath}}/user/profile
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+{}
+
+###
+GET {{baseUrl}}/{{urlPath}}/user/profile/65d07f28336ce64052b2f93e
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+{}
+###
+GET {{baseUrl}}/{{urlPath}}/user/profile/posts/Chris/65d07f43336ce64052b2f94c/565826715275
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+{}
+
+###
+GET {{baseUrl}}/{{urlPath}}/user/profile/user/suggestions
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+{}
+
+
+###
+GET {{baseUrl}}/{{urlPath}}/user/profile/search/j
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+{}
+
+###
+PUT {{baseUrl}}/{{urlPath}}/user/profile/change-password
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+{
+  "currentPassword": "qwerty",
+  "newPassword": "1234567",
+  "confirmPassword": "1234567"
+}
+
+###
+PUT {{baseUrl}}/{{urlPath}}/user/profile/basic-info
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+{
+  "quote": "I am a software developer",
+  "work": "Software Developer",
+  "school": "Francis Xavier",
+  "location": "Paris, France"
+}
+
+###
+PUT {{baseUrl}}/{{urlPath}}/user/profile/social-links
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+{
+  "instagram": "",
+  "twitter": "",
+  "facebook": "https://www.facebook.com/username",
+  "youtube": "https://www.youtube.com/username"
+}
+
+###
+PUT {{baseUrl}}/{{urlPath}}/user/profile/settings
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+{
+  "messages": false,
+  "reactions": true,
+  "comments": false,
+  "follows": true
+}

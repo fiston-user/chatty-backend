@@ -10,6 +10,7 @@ class EmailQueue extends BaseQueue {
     this.proccessJob('followerEmail', 6, emailWorker.addNotificationEmail);
     this.proccessJob('reactionsEmail', 6, emailWorker.addNotificationEmail);
     this.proccessJob('directMessageEmail', 6, emailWorker.addNotificationEmail);
+    this.proccessJob('changePassword', 6, emailWorker.addNotificationEmail);
   }
 
   public addEmailJob(name: string, data: IEmailJob): void {

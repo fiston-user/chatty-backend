@@ -9,12 +9,12 @@ Accept: application/json
 withCredentials: true
 
 {
-  "post": "IT SHOULD NOT BE HERE",
+  "post": "How Ai is changing the world",
   "bgColor": "#ffff",
-  "privacy": "Private",
+  "privacy": "Public",
   "gifUrl": "",
-  "profilePicture": "https://media.giphy.com/media/3o7TKz5v3k3J3Jp2Wc/giphy.gif",
-  "feelings": "sad"
+  "profilePicture": "https://res.cloudinary.com/the-drod-team/image/upload/v1708162885/65d07f43336ce64052b2f94c",
+  "feelings": "excited"
 }
 
 
