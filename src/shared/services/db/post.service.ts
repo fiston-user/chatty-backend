@@ -15,6 +15,8 @@ class PostService {
     let postQuery = {};
     if (query?.imgId && query?.gifUrl) {
       postQuery = { $or: [{ imgId: { $ne: '' } }, { gifUrl: { $ne: '' } }] };
+    } else if (query?.videoId) {
+      postQuery = { $or: [{ videoId: { $ne: '' } }] };
     } else {
       postQuery = query;
     }
@@ -30,7 +32,6 @@ class PostService {
 
   public async deletePost(postId: string, userId: string): Promise<void> {
     const deletePost: Query<IQueryComplete & IQueryDeleted, IPostDocument> = PostModel.deleteOne({ _id: postId });
-    // TODO: delete  reactions schema
     const decrementPostCount: UpdateQuery<IUserDocument> = UserModel.updateOne({ _id: userId }, { $inc: { postsCount: -1 } });
     await Promise.all([deletePost, decrementPostCount]);
   }

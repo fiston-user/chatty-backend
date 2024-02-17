@@ -34,6 +34,21 @@ withCredentials: true
   "image": "https://media.giphy.com/media/3o7TKz5v3k3J3Jp2Wc/giphy.gif"
 }
 
+###
+POST {{baseUrl}}/{{urlPath}}/post/video/post
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+{
+  "post": "I took a video of the sunset",
+  "bgColor": "#ffff",
+  "privacy": "Public",
+  "gifUrl": "",
+  "profilePicture": "https://res.cloudinary.com/the-drod-team/image/upload/v1708196900/65d1042201b2664210c66794",
+  "feelings": "sad",
+  "video": ""
+}
 
 ###
 GET {{baseUrl}}/{{urlPath}}/post/all/1
@@ -45,6 +60,14 @@ withCredentials: true
 
 ###
 GET {{baseUrl}}/{{urlPath}}/post/images/1
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+{}
+
+###
+GET {{baseUrl}}/{{urlPath}}/post/videos/1
 Content-Type: application/json
 Accept: application/json
 withCredentials: true
