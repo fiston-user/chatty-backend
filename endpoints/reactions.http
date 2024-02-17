@@ -1,0 +1,51 @@
+@baseUrl = http://localhost:5000
+@urlPath = api/v1
+
+
+###
+POST {{baseUrl}}/{{urlPath}}/post/reaction
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+{
+  "userTo": "65cca608d9ab04bf7021008f",
+  "postId": "65cd48e41d4cc86e3ac854f4",
+  "type": "happy",
+  "postReactions": {"like":0,"love":0,"happy":1,"wow":0,"sad":0,"angry":0},
+  "previousReaction": "",
+  "profilePicture": "https://media.giphy.com/media/3o7TKz5v3k3J3Jp2Wc/giphy.gif"
+}
+
+
+###
+DELETE {{baseUrl}}/{{urlPath}}/post/reaction/65cb9e5a47721ce6c0d6e840/happy/{"like":0,"love":0,"happy":0,"wow":0,"sad":0,"angry":0}
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+{}
+
+###
+GET {{baseUrl}}/{{urlPath}}/post/reactions/65cb9e5a47721ce6c0d6e840
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+{}
+
+###
+GET {{baseUrl}}/{{urlPath}}/post/single/reaction/username/john/65cb9e5a47721ce6c0d6e840
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+{}
+
+###
+GET {{baseUrl}}/{{urlPath}}/post/reactions/username/jane
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+{}

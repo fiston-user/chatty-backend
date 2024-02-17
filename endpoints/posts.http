@@ -1,0 +1,123 @@
+@baseUrl = http://localhost:5000
+@urlPath = api/v1
+
+
+###
+POST {{baseUrl}}/{{urlPath}}/post
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+{
+  "post": "How Ai is changing the world",
+  "bgColor": "#ffff",
+  "privacy": "Public",
+  "gifUrl": "",
+  "profilePicture": "https://res.cloudinary.com/the-drod-team/image/upload/v1708162885/65d07f43336ce64052b2f94c",
+  "feelings": "excited"
+}
+
+
+###
+POST {{baseUrl}}/{{urlPath}}/post/image/post
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+{
+  "post": "A POST WITH AN IMAGE ZED",
+  "bgColor": "#ffff",
+  "privacy": "Private",
+  "gifUrl": "",
+  "profilePicture": "https://media.giphy.com/media/3o7TKz5v3k3J3Jp2Wc/giphy.gif",
+  "feelings": "sad",
+  "image": "https://media.giphy.com/media/3o7TKz5v3k3J3Jp2Wc/giphy.gif"
+}
+
+###
+POST {{baseUrl}}/{{urlPath}}/post/video/post
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+{
+  "post": "I took a video of the sunset",
+  "bgColor": "#ffff",
+  "privacy": "Public",
+  "gifUrl": "",
+  "profilePicture": "https://res.cloudinary.com/the-drod-team/image/upload/v1708196900/65d1042201b2664210c66794",
+  "feelings": "sad",
+  "video": ""
+}
+
+###
+GET {{baseUrl}}/{{urlPath}}/post/all/1
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+{}
+
+###
+GET {{baseUrl}}/{{urlPath}}/post/images/1
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+{}
+
+###
+GET {{baseUrl}}/{{urlPath}}/post/videos/1
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+{}
+
+###
+DELETE {{baseUrl}}/{{urlPath}}/post/65cb3933c6f61c6b6f1f714e
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+{}
+
+###
+PUT {{baseUrl}}/{{urlPath}}/post/65cb393ac6f61c6b6f1f7152
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+{
+  "post": "This is an updated post",
+  "bgColor": "green",
+  "privacy": "Public",
+  "gifUrl": "",
+  "profilePicture": "https://media.giphy.com/media/3o7TKz5v3k3J3Jp2Wc/giphy.gif",
+  "feelings": "happy",
+  "imgId": "",
+  "imgVersion": "",
+  "videoId": "",
+  "videoVersion": ""
+}
+
+
+###
+PUT {{baseUrl}}/{{urlPath}}/post/image/65cb393ac6f61c6b6f1f7152
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+{
+  "post": "This is an updated post with a new image but new properties",
+  "bgColor": "blue",
+  "privacy": "Private",
+  "gifUrl": "",
+  "profilePicture": "https://media.giphy.com/media/3o7TKz5v3k3J3Jp2Wc/giphy.gif",
+  "feelings": "sad",
+  "imgId": "a2yct3e3z8h77fuzqyex",
+  "imgVersion": "1707830988",
+  "videoId": "",
+  "videoVersion": "",
+  "image": "https://plus.unsplash.com/premium_photo-1663932464823-1e85942a1115?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+}
