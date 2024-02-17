@@ -1,0 +1,66 @@
+@baseUrl = http://localhost:5000
+@urlPath = api/v1
+
+###
+POST {{baseUrl}}/{{urlPath}}/signup
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+{
+  "username": "yahya",
+  "password": "qwerty",
+  "email": "yahya.doe@domain.fr",
+  "avatarColor": "blue",
+  "avatarImage": "https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png"
+}
+
+###
+POST {{baseUrl}}/{{urlPath}}/signin
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+{
+  "username": "yahya",
+  "password": "qwerty"
+}
+
+###
+GET {{baseUrl}}/{{urlPath}}/signout
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+{}
+
+
+###
+GET {{baseUrl}}/{{urlPath}}/currentuser
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+{}
+
+###
+POST {{baseUrl}}/{{urlPath}}/forgot-password
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+{
+  "email": "jane.doe@domain.fr"
+}
+
+
+###
+POST {{baseUrl}}/{{urlPath}}/reset-password/1ae62637ef5e6cbc155a369802cb81d8527416e1
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+{
+  "password": "qwerty1",
+  "confirmPassword": "qwerty1"
+}
