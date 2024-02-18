@@ -14,7 +14,9 @@ class HealthRoutes {
 
   public health(): Router {
     this.router.get('/health', (req: Request, res: Response) => {
-      res.status(HTTP_STATUS.OK).send(`Health: Server instance is healthy with process id: ${process.pid} on ${moment().format('LL')}`);
+      res
+        .status(HTTP_STATUS.OK)
+        .send(`Health: Server instance is healthy with process id: ${process.pid} on ${moment().format('LL')} sickkkk`);
     });
     return this.router;
   }
@@ -45,14 +47,14 @@ class HealthRoutes {
       const start: number = performance.now();
       const result: number = this.fibo(parseInt(req.params.num, 10));
       const end: number = performance.now();
-      // const response = await axios({
-      //   method: 'get',
-      //   url: config.EC2_URL
-      // });
+      const response = await axios({
+        method: 'get',
+        url: config.EC2_URL
+      });
       res
         .status(HTTP_STATUS.OK)
         .send(
-          `Fibo of ${num} is ${result} and it took ${end - start} milliseconds with process id: ${process.pid} on ${moment().format('LL')}`
+          `Fibo of ${num} is ${result} and it took ${end - start} milliseconds with process id: ${process.pid} on ${moment().format('LL')} on instance: ${response.data}`
         );
     });
     return this.router;
