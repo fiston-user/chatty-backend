@@ -22,8 +22,6 @@ export function uploads(
   });
 }
 
-
-
 export function videoUpload(
   file: string,
   public_id?: string,
