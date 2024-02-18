@@ -37,11 +37,11 @@ fi
 
 cd /home/ec2-user
 
-git clone -b develop https://github.com/fiston-user/chatty-backend.git
+git clone -b main https://github.com/fiston-user/chatty-backend.git
 cd chatty-backend
 npm install
-aws s3 sync s3://chat-app-env-files/develop .
+aws s3 sync s3://chat-app-env-files/production .
 unzip env-file.zip
-cp .env.develop .env
+cp .env.production .env
 npm run build
 npm run start
