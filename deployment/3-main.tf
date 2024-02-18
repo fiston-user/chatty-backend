@@ -1,7 +1,7 @@
 terraform {
   backend "s3" {
     bucket  = "inkteract-app-terraform-state"
-    key     = "staging/chatapp.tfstate"
+    key     = "production/chatapp.tfstate"
     region  = "eu-central-1"
     encrypt = true
   }
