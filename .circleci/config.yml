@@ -111,7 +111,7 @@ jobs:
     steps:
       - checkout
       - *show-current-branche-name
-      - *restore-cache
+      # - *restore-cache
       - *install-dependencies
       - *save-cache
 
@@ -120,7 +120,7 @@ jobs:
     steps:
       - checkout
       - *show-current-branche-name
-      - *restore-cache
+      # - *restore-cache
       - run:
           name: Run linting
           command: npm run lint:check
@@ -131,7 +131,7 @@ jobs:
     steps:
       - checkout
       - *show-current-branche-name
-      - *restore-cache
+      # - *restore-cache
       - run:
           name: Run code formater check
           command: npm run prettier:check
@@ -143,7 +143,7 @@ jobs:
       - checkout
       - setup_remote_docker
       - *show-current-branche-name
-      - *restore-cache
+      # - *restore-cache
       - run:
           name: Start redis server
           command: docker run --name chatapp-redis -p 6379:6379 -d redis
