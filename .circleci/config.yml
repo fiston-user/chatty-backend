@@ -22,7 +22,7 @@ aliases:
   - &show-current-branche-name
     run:
       name: Show current branch name
-      command: echo ${CURRENT_BRANCH}
+      command: echo ${CIRCLE_BRANCH}
   - &restore-cache
     restore_cache:
       keys:
@@ -114,7 +114,6 @@ jobs:
       - *restore-cache
       - *install-dependencies
       - *save-cache
-      - *notify-on-fail
 
   linting:
     executor: app-executor
@@ -157,18 +156,7 @@ jobs:
       - codecov/upload
       - *notify-on-fail
 
-  upload-project-to-s3:
-    executor: aws-cli/default
-    steps:
-      - checkout
-      - aws-cli/setup:
-          profile_name: default
-      - *zip-project
-      - run:
-          name: Upload project to S3
-          command: |
-            aws --region eu-central-1 s3 cp chatapp.zip s3://chatty-server-${CIRCLE_BRANCH}-app
-      - *notify-on-fail
+
 
   terraform-validate:
     executor: terraform-executor
@@ -203,6 +191,19 @@ jobs:
             terraform init
             terraform workspace select ${CIRCLE_BRANCH}
             terraform apply -auto-approve
+      - *notify-on-fail
+
+  upload-project-to-s3:
+    executor: aws-cli/default
+    steps:
+      - checkout
+      - aws-cli/setup:
+          profile_name: default
+      - *zip-project
+      - run:
+          name: Upload project to S3
+          command: |
+            aws --region eu-central-1 s3 cp chatapp.zip s3://chatty-server-${CIRCLE_BRANCH}-app
       - *notify-on-fail
 
   push-to-aws-codedeploy:
@@ -335,18 +336,9 @@ workflows:
                 - develop
                 - staing
                 - main
-     - upload-project-to-s3:
-          requires:
-            - unit-test
-          filters:
-            branches:
-              only:
-                - develop
-                - staing
-                - main
      - terraform-validate:
           requires:
-            - upload-project-to-s3
+            - unit-test
           filters:
             branches:
               only:
@@ -362,9 +354,18 @@ workflows:
                 - develop
                 - staing
                 - main
-     - push-to-aws-codedeploy:
+     - upload-project-to-s3:
           requires:
             - terraform-plan-and-apply
+          filters:
+            branches:
+              only:
+                - develop
+                - staing
+                - main
+     - push-to-aws-codedeploy:
+          requires:
+            - upload-project-to-s3
           filters:
             branches:
               only:
