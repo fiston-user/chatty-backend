@@ -171,34 +171,37 @@ jobs:
             terraform validate
             terraform fmt
       - *notify-on-fail
-  
-  aws-cli-setup:
-    executor: aws-cli/default
-    steps:
-      - checkout
-      - aws-cli/setup:
-          profile_name: default
 
-  terraform-plan-and-apply:
-    executor: terraform-executor
-    steps:
-      - checkout
-      - *show-current-branche-name
-      - run:
-          name: Terraform plan
-          command: |
-            cd deployment/
-            terraform init
-            terraform workspace select ${CIRCLE_BRANCH} || terraform workspace new ${CIRCLE_BRANCH}
-            terraform plan
-      - run:
-          name: Terraform apply
-          command: |
-            cd deployment/
-            terraform init
-            terraform workspace select ${CIRCLE_BRANCH}
-            terraform apply -auto-approve
-      - *notify-on-fail
+terraform-plan-and-apply:
+  executor: terraform-executor
+  steps:
+    - checkout
+    - *show-current-branche-name
+    - run:
+        name: Install AWS CLI
+        command: |
+          curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+          unzip awscliv2.zip
+          sudo ./aws/install
+    - run:
+        name: Check AWS CLI version
+        command: aws --version
+    - run:
+        name: Terraform plan
+        command: |
+          cd deployment/
+          terraform init
+          terraform workspace select ${CIRCLE_BRANCH} || terraform workspace new ${CIRCLE_BRANCH}
+          terraform plan
+    - run:
+        name: Terraform apply
+        command: |
+          cd deployment/
+          terraform init
+          terraform workspace select ${CIRCLE_BRANCH}
+          terraform apply -auto-approve
+    - *notify-on-fail
+
 
   upload-project-to-s3:
     executor: aws-cli/default
@@ -352,18 +355,9 @@ workflows:
                 - develop
                 - staing
                 - main
-     - aws-cli-setup:
-          requires:
-            - terraform-validate
-          filters:
-            branches:
-              only:
-                - develop
-                - staing
-                - main
      - terraform-plan-and-apply:
           requires:
-            - aws-cli-setup
+            - terraform-validate
           filters:
             branches:
               only:
