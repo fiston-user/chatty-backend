@@ -176,9 +176,9 @@ jobs:
     executor: terraform-executor
     steps:
       - checkout
-      - *show-current-branche-name
       - aws-cli/setup:
           profile_name: default
+      - *show-current-branche-name
       - run:
           name: Terraform plan
           command: |
