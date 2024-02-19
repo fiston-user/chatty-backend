@@ -194,9 +194,6 @@ jobs:
             unzip awscliv2.zip
             ./aws/install
       - run:
-          name: Check AWS CLI version
-          command: aws --version
-      - run:
           name: Terraform plan
           command: |
             cd deployment/
