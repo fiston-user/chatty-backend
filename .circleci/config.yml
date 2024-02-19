@@ -177,6 +177,8 @@ jobs:
     steps:
       - checkout
       - *show-current-branche-name
+      - aws-cli/setup:
+          profile_name: default
       - run:
           name: Terraform plan
           command: |
