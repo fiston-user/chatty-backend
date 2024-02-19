@@ -363,7 +363,7 @@ workflows:
                 - main
      - terraform-plan-and-apply:
           requires:
-            - terraform-validate
+            - aws-cli-setup
           filters:
             branches:
               only:
