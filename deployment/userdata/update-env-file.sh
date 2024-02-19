@@ -13,6 +13,11 @@ if [ $(program_is_installed zip) == 0 ]; then
    apk add zip
 fi
 
+if [ $(program_is_installed aws) == 0 ]; then
+   apk update
+   apk add --no-cache aws-cli
+fi
+
 aws s3 sync s3://chat-app-env-files/develop .
 unzip env-file.zip
 cp .env.develop .env

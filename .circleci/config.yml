@@ -178,22 +178,6 @@ jobs:
       - checkout
       - *show-current-branche-name
       - run:
-          name: Install ZIP
-          command: |
-            apk update
-            apk add zip
-      - run:
-          name: Install CURL
-          command: |
-            apk update
-            apk add curl
-      - run:
-          name: Install AWS CLI
-          command: |
-            curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-            unzip awscliv2.zip
-            ./aws/install
-      - run:
           name: Terraform plan
           command: |
             cd deployment/
