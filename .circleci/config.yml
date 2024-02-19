@@ -162,8 +162,6 @@ jobs:
     executor: terraform-executor
     steps:
       - checkout
-      - aws-cli/setup:
-          profile_name: default
       - *show-current-branche-name
       - run:
           name: Terraform validate & format
@@ -173,6 +171,13 @@ jobs:
             terraform validate
             terraform fmt
       - *notify-on-fail
+  
+  aws-cli-setup:
+    executor: aws-cli/default
+    steps:
+      - checkout
+      - aws-cli/setup:
+          profile_name: default
 
   terraform-plan-and-apply:
     executor: terraform-executor
@@ -341,6 +346,15 @@ workflows:
      - terraform-validate:
           requires:
             - unit-test
+          filters:
+            branches:
+              only:
+                - develop
+                - staing
+                - main
+     - aws-cli-setup:
+          requires:
+            - terraform-validate
           filters:
             branches:
               only:
