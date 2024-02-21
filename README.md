@@ -1,2 +1,2 @@
-[![CircleCI](https://dl.circleci.com/status-badge/img/circleci/PwhkfHZwYahh6E9U7bgAfN/5qQGg1dTQ7Zr8shdiBqBGv/tree/develop.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/circleci/PwhkfHZwYahh6E9U7bgAfN/5qQGg1dTQ7Zr8shdiBqBGv/tree/develop)
+[![CircleCI](https://dl.circleci.com/status-badge/img/circleci/PwhkfHZwYahh6E9U7bgAfN/5qQGg1dTQ7Zr8shdiBqBGv/tree/develop.svg?style=svg&circle-token=5184222c0a68923881c57d0b343aabbbf96c3647)](https://dl.circleci.com/status-badge/redirect/circleci/PwhkfHZwYahh6E9U7bgAfN/5qQGg1dTQ7Zr8shdiBqBGv/tree/develop)
 [![codecov](https://codecov.io/gh/fiston-user/chatty-backend/graph/badge.svg?token=P7JTKH0QI6)](https://codecov.io/gh/fiston-user/chatty-backend)
